@@ -2,40 +2,43 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
+// Camera positions calculated to look directly at each painting
+// Room: x [-6, 6], y [-4, 4], z [0, 3.5]
+// Paintings are on walls, camera must be inside room looking outward at wall
 const cameraWaypoints = [
-  // Overview - center of room
-  { position: [0, 1.6, 0], lookAt: [0, 1.6, -3.9] },
+  // Overview - standing in center, looking at north wall
+  { position: [0, 0, 1.6], lookAt: [0, -3.9, 1.6] },
   
-  // West wall paintings (looking left from center)
-  { position: [-2, 1.6, 1], lookAt: [-5.9, 1.6, 0] },
-  { position: [-2, -1, 1], lookAt: [-5.9, -2.5, 1.65] },
-  { position: [-2, 2.5, 1], lookAt: [-5.9, 2.5, 1.6] },
+  // West wall paintings - camera at x=-3 looking at x=-5.94
+  { position: [-3, 0, 1.6], lookAt: [-5.94, 0, 1.6] },       // Art_W1 center
+  { position: [-3, -2.5, 1.65], lookAt: [-5.94, -2.5, 1.65] }, // Art_W2
+  { position: [-3, 2.5, 1.6], lookAt: [-5.94, 2.5, 1.6] },    // Art_W3
   
-  // North wall paintings (looking back from center)
-  { position: [-1, -1.5, 1.6], lookAt: [-3, -3.9, 1.65] },
-  { position: [1, -1.5, 1.6], lookAt: [0, -3.9, 1.6] },
-  { position: [2.5, -1.5, 1.6], lookAt: [3, -3.9, 1.65] },
+  // North wall paintings - camera at y=-1 looking at y=-3.94
+  { position: [-3, -1, 1.65], lookAt: [-3, -3.94, 1.65] },    // Art_N1
+  { position: [0, -1, 1.6], lookAt: [0, -3.94, 1.6] },        // Art_N2
+  { position: [3, -1, 1.65], lookAt: [3, -3.94, 1.65] },      // Art_N3
   
-  // East wall paintings (looking right from center)
-  { position: [2, 1.6, 1], lookAt: [5.9, 1.6, 1.65] },
-  { position: [2, 2.5, 1], lookAt: [5.9, 2.5, 1.6] },
+  // East wall paintings - camera at x=3 looking at x=5.94
+  { position: [3, 0, 1.65], lookAt: [5.94, 0, 1.65] },        // Art_E1
+  { position: [3, 2.5, 1.6], lookAt: [5.94, 2.5, 1.6] },      // Art_E2
   
-  // South wall paintings (looking front from center)
-  { position: [-1, 1.5, 1.6], lookAt: [-3, 3.9, 1.6] },
-  { position: [1, 1.5, 1.6], lookAt: [0, 3.9, 1.65] },
-  { position: [2.5, 1.5, 1.6], lookAt: [3, 3.9, 1.6] },
+  // South wall paintings - camera at y=1 looking at y=3.94
+  { position: [-3, 1, 1.6], lookAt: [-3, 3.94, 1.6] },        // Art_S1
+  { position: [0, 1, 1.65], lookAt: [0, 3.94, 1.65] },        // Art_S2
+  { position: [3, 1, 1.6], lookAt: [3, 3.94, 1.6] },          // Art_S3
   
-  // Sculptures
-  { position: [-0.5, 0.5, 1.8], lookAt: [-2, 0, 1.35] },
-  { position: [3, 2.5, 1.8], lookAt: [2, 1.5, 1.4] },
+  // Sculptures - looking down at pedestals
+  { position: [-0.5, 0, 1.8], lookAt: [-2, 0, 1.0] },         // Abstract sculpture
+  { position: [3.5, 1, 1.8], lookAt: [2, 1.5, 1.0] },         // Geometric sculpture
 ]
 
 function CameraController({ currentIndex }) {
   const { camera } = useThree()
-  const targetPos = useRef([0, 1.6, 0])
-  const targetLookAt = useRef([0, 1.6, -3.9])
-  const currentPos = useRef([0, 1.6, 0])
-  const currentLookAt = useRef([0, 1.6, -3.9])
+  const targetPos = useRef([0, 0, 1.6])
+  const targetLookAt = useRef([0, -3.9, 1.6])
+  const currentPos = useRef([0, 0, 1.6])
+  const currentLookAt = useRef([0, -3.9, 1.6])
 
   useEffect(() => {
     const waypoint = cameraWaypoints[currentIndex]
@@ -46,7 +49,7 @@ function CameraController({ currentIndex }) {
   }, [currentIndex])
 
   useFrame((_, delta) => {
-    const lerpFactor = 1 - Math.pow(0.008, delta)
+    const lerpFactor = 1 - Math.pow(0.005, delta)
 
     for (let i = 0; i < 3; i++) {
       currentPos.current[i] += (targetPos.current[i] - currentPos.current[i]) * lerpFactor
