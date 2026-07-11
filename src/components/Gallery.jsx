@@ -3,36 +3,39 @@ import { useThree, useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
 const cameraWaypoints = [
-  // West wall paintings
-  { position: [-3.5, 1.6, 2], lookAt: [-5.94, 0, 1.6] },
-  { position: [-3.5, -1.5, 2], lookAt: [-5.94, -2.5, 1.65] },
-  { position: [-3.5, 3, 2], lookAt: [-5.94, 2.5, 1.6] },
+  // Overview - center of room
+  { position: [0, 1.6, 0], lookAt: [0, 1.6, -3.9] },
   
-  // North wall paintings
-  { position: [-1.5, -2, 1.6], lookAt: [-3, -3.94, 1.65] },
-  { position: [1.5, -2, 1.6], lookAt: [0, -3.94, 1.6] },
-  { position: [3.5, -2, 1.6], lookAt: [3, -3.94, 1.65] },
+  // West wall paintings (looking left from center)
+  { position: [-2, 1.6, 1], lookAt: [-5.9, 1.6, 0] },
+  { position: [-2, -1, 1], lookAt: [-5.9, -2.5, 1.65] },
+  { position: [-2, 2.5, 1], lookAt: [-5.9, 2.5, 1.6] },
   
-  // East wall paintings
-  { position: [3.5, 1.6, 2], lookAt: [5.94, 0, 1.65] },
-  { position: [3.5, 3, 2], lookAt: [5.94, 2.5, 1.6] },
+  // North wall paintings (looking back from center)
+  { position: [-1, -1.5, 1.6], lookAt: [-3, -3.9, 1.65] },
+  { position: [1, -1.5, 1.6], lookAt: [0, -3.9, 1.6] },
+  { position: [2.5, -1.5, 1.6], lookAt: [3, -3.9, 1.65] },
   
-  // South wall paintings
-  { position: [-1.5, 2, 1.6], lookAt: [-3, 3.94, 1.6] },
-  { position: [1.5, 2, 1.6], lookAt: [0, 3.94, 1.65] },
-  { position: [3.5, 2, 1.6], lookAt: [3, 3.94, 1.6] },
+  // East wall paintings (looking right from center)
+  { position: [2, 1.6, 1], lookAt: [5.9, 1.6, 1.65] },
+  { position: [2, 2.5, 1], lookAt: [5.9, 2.5, 1.6] },
+  
+  // South wall paintings (looking front from center)
+  { position: [-1, 1.5, 1.6], lookAt: [-3, 3.9, 1.6] },
+  { position: [1, 1.5, 1.6], lookAt: [0, 3.9, 1.65] },
+  { position: [2.5, 1.5, 1.6], lookAt: [3, 3.9, 1.6] },
   
   // Sculptures
   { position: [-0.5, 0.5, 1.8], lookAt: [-2, 0, 1.35] },
-  { position: [3.5, 2.5, 1.8], lookAt: [2, 1.5, 1.4] },
+  { position: [3, 2.5, 1.8], lookAt: [2, 1.5, 1.4] },
 ]
 
 function CameraController({ currentIndex }) {
   const { camera } = useThree()
-  const targetPos = useRef([0, 1.6, 5])
-  const targetLookAt = useRef([0, 1.6, 0])
-  const currentPos = useRef([0, 1.6, 5])
-  const currentLookAt = useRef([0, 1.6, 0])
+  const targetPos = useRef([0, 1.6, 0])
+  const targetLookAt = useRef([0, 1.6, -3.9])
+  const currentPos = useRef([0, 1.6, 0])
+  const currentLookAt = useRef([0, 1.6, -3.9])
 
   useEffect(() => {
     const waypoint = cameraWaypoints[currentIndex]
@@ -43,7 +46,7 @@ function CameraController({ currentIndex }) {
   }, [currentIndex])
 
   useFrame((_, delta) => {
-    const lerpFactor = 1 - Math.pow(0.005, delta)
+    const lerpFactor = 1 - Math.pow(0.008, delta)
 
     for (let i = 0; i < 3; i++) {
       currentPos.current[i] += (targetPos.current[i] - currentPos.current[i]) * lerpFactor
@@ -132,7 +135,7 @@ export default function Gallery({ loaded }) {
     <group ref={groupRef}>
       <CameraController currentIndex={currentIndex} />
       
-      <ambientLight intensity={0.25} />
+      <ambientLight intensity={0.3} />
       
       <spotLight
         position={[0, 3.3, 0]}
@@ -144,23 +147,21 @@ export default function Gallery({ loaded }) {
       />
       
       <spotLight
-        position={[-4.5, 0, 3.3]}
+        position={[-4, 0, 3.3]}
         angle={Math.PI / 5}
         penumbra={0.5}
         intensity={0.9}
         color="#fff5e8"
         distance={10}
-        target-position={[-5.94, 0, 1.6]}
       />
       
       <spotLight
-        position={[4.5, 0, 3.3]}
+        position={[4, 0, 3.3]}
         angle={Math.PI / 5}
         penumbra={0.5}
         intensity={0.9}
         color="#fff5e8"
         distance={10}
-        target-position={[5.94, 0, 1.65]}
       />
       
       <spotLight
@@ -170,7 +171,6 @@ export default function Gallery({ loaded }) {
         intensity={0.8}
         color="#fff8f0"
         distance={10}
-        target-position={[0, -3.94, 1.6]}
       />
       
       <spotLight
@@ -180,7 +180,6 @@ export default function Gallery({ loaded }) {
         intensity={0.8}
         color="#fff8f0"
         distance={10}
-        target-position={[0, 3.94, 1.65]}
       />
 
       <GalleryScene />
