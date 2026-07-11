@@ -3,18 +3,28 @@ import { useThree, useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
 const cameraWaypoints = [
-  { position: [0, 1.6, 5], lookAt: [-5.5, 1.6, 0] },
-  { position: [-2, 1.6, 4], lookAt: [-3, 1.6, -3.9] },
-  { position: [0, 1.6, 5], lookAt: [0, 1.6, -3.9] },
-  { position: [2, 1.6, 4], lookAt: [3, 1.6, -3.9] },
-  { position: [4, 1.6, 3], lookAt: [5.5, 1.6, 0] },
-  { position: [4, 1.6, 1], lookAt: [5.5, 1.6, 2.5] },
-  { position: [0, 1.6, 2], lookAt: [-2, 0.5, 0] },
-  { position: [3, 1.6, 3], lookAt: [2, 0.5, 1.5] },
-  { position: [-4, 1.6, -1], lookAt: [-5.5, 1.6, 2.5] },
-  { position: [-2, 1.6, -4], lookAt: [-3, 1.6, 3.9] },
-  { position: [0, 1.6, -4], lookAt: [0, 1.6, 3.9] },
-  { position: [2, 1.6, -4], lookAt: [3, 1.6, 3.9] }
+  // West wall paintings
+  { position: [-3.5, 1.6, 2], lookAt: [-5.94, 0, 1.6] },
+  { position: [-3.5, -1.5, 2], lookAt: [-5.94, -2.5, 1.65] },
+  { position: [-3.5, 3, 2], lookAt: [-5.94, 2.5, 1.6] },
+  
+  // North wall paintings
+  { position: [-1.5, -2, 1.6], lookAt: [-3, -3.94, 1.65] },
+  { position: [1.5, -2, 1.6], lookAt: [0, -3.94, 1.6] },
+  { position: [3.5, -2, 1.6], lookAt: [3, -3.94, 1.65] },
+  
+  // East wall paintings
+  { position: [3.5, 1.6, 2], lookAt: [5.94, 0, 1.65] },
+  { position: [3.5, 3, 2], lookAt: [5.94, 2.5, 1.6] },
+  
+  // South wall paintings
+  { position: [-1.5, 2, 1.6], lookAt: [-3, 3.94, 1.6] },
+  { position: [1.5, 2, 1.6], lookAt: [0, 3.94, 1.65] },
+  { position: [3.5, 2, 1.6], lookAt: [3, 3.94, 1.6] },
+  
+  // Sculptures
+  { position: [-0.5, 0.5, 1.8], lookAt: [-2, 0, 1.35] },
+  { position: [3.5, 2.5, 1.8], lookAt: [2, 1.5, 1.4] },
 ]
 
 function CameraController({ currentIndex }) {
@@ -33,7 +43,7 @@ function CameraController({ currentIndex }) {
   }, [currentIndex])
 
   useFrame((_, delta) => {
-    const lerpFactor = 1 - Math.pow(0.01, delta)
+    const lerpFactor = 1 - Math.pow(0.005, delta)
 
     for (let i = 0; i < 3; i++) {
       currentPos.current[i] += (targetPos.current[i] - currentPos.current[i]) * lerpFactor
@@ -122,51 +132,55 @@ export default function Gallery({ loaded }) {
     <group ref={groupRef}>
       <CameraController currentIndex={currentIndex} />
       
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={0.25} />
       
       <spotLight
-        position={[0, 3.4, 0]}
-        angle={Math.PI / 4}
-        penumbra={0.5}
-        intensity={1.5}
-        color="#fff5e6"
+        position={[0, 3.3, 0]}
+        angle={Math.PI / 3}
+        penumbra={0.6}
+        intensity={1.2}
+        color="#fff8f0"
         castShadow={false}
       />
       
       <spotLight
-        position={[-4, 3.4, 0]}
-        angle={Math.PI / 6}
-        penumbra={0.6}
-        intensity={1.2}
+        position={[-4.5, 0, 3.3]}
+        angle={Math.PI / 5}
+        penumbra={0.5}
+        intensity={0.9}
+        color="#fff5e8"
+        distance={10}
+        target-position={[-5.94, 0, 1.6]}
+      />
+      
+      <spotLight
+        position={[4.5, 0, 3.3]}
+        angle={Math.PI / 5}
+        penumbra={0.5}
+        intensity={0.9}
+        color="#fff5e8"
+        distance={10}
+        target-position={[5.94, 0, 1.65]}
+      />
+      
+      <spotLight
+        position={[0, -2, 3.3]}
+        angle={Math.PI / 5}
+        penumbra={0.5}
+        intensity={0.8}
         color="#fff8f0"
-        distance={8}
+        distance={10}
+        target-position={[0, -3.94, 1.6]}
       />
       
       <spotLight
-        position={[4, 3.4, 0]}
-        angle={Math.PI / 6}
-        penumbra={0.6}
-        intensity={1.2}
+        position={[0, 2, 3.3]}
+        angle={Math.PI / 5}
+        penumbra={0.5}
+        intensity={0.8}
         color="#fff8f0"
-        distance={8}
-      />
-      
-      <spotLight
-        position={[0, 3.4, -3]}
-        angle={Math.PI / 6}
-        penumbra={0.6}
-        intensity={1.0}
-        color="#fffaf5"
-        distance={8}
-      />
-      
-      <spotLight
-        position={[0, 3.4, 3]}
-        angle={Math.PI / 6}
-        penumbra={0.6}
-        intensity={1.0}
-        color="#fffaf5"
-        distance={8}
+        distance={10}
+        target-position={[0, 3.94, 1.65]}
       />
 
       <GalleryScene />

@@ -4,63 +4,124 @@
     "title": "Ethereal Horizons",
     "artist": "Elena Vasquez",
     "type": "painting",
-    "position": [-5.5, 1.6, -0.1],
+    "position": [-5.94, 0, 1.6],
     "rotation": [0, 1.5708, 0],
-    "size": [1.8, 1.2],
+    "size": [1.6, 1.1],
+    "frame": "gilt",
     "description": "An exploration of light and space, where mountains dissolve into sky."
   },
   {
     "id": 2,
-    "title": "Composition in Blue",
-    "artist": "Marcus Chen",
+    "title": "Whispers in Amber",
+    "artist": "Leila Hassan",
     "type": "painting",
-    "position": [-3, 1.6, -3.9],
-    "rotation": [0, 0, 0],
-    "size": [2.0, 1.4],
-    "description": "Geometric abstraction exploring the relationship between form and color."
+    "position": [-5.94, -2.5, 1.65],
+    "rotation": [0, 1.5708, 0],
+    "size": [1.2, 0.9],
+    "frame": "modern",
+    "description": "Delicate tonal variations capturing the warmth of twilight."
   },
   {
     "id": 3,
-    "title": "Still Life with Flowers",
-    "artist": "Sofia Laurent",
+    "title": "Monumental Forms",
+    "artist": "Marcus Chen",
     "type": "painting",
-    "position": [0, 1.6, -3.9],
-    "rotation": [0, 0, 0],
-    "size": [1.2, 1.6],
-    "description": "A contemporary take on classical still life traditions."
+    "position": [-5.94, 2.5, 1.6],
+    "rotation": [0, 1.5708, 0],
+    "size": [1.8, 1.2],
+    "frame": "wood",
+    "description": "Bold geometric abstraction exploring architectural weight."
   },
   {
     "id": 4,
     "title": "Urban Fragments",
     "artist": "James Okafor",
     "type": "painting",
-    "position": [3, 1.6, -3.9],
+    "position": [-3, -3.94, 1.65],
     "rotation": [0, 0, 0],
-    "size": [1.6, 1.2],
+    "size": [1.4, 1.0],
+    "frame": "modern",
     "description": "Deconstructed cityscapes revealing hidden patterns in urban environments."
   },
   {
     "id": 5,
-    "title": "Serenity",
-    "artist": "Yuki Tanaka",
+    "title": "Still Life with Flowers",
+    "artist": "Sofia Laurent",
     "type": "painting",
-    "position": [5.5, 1.6, -0.1],
-    "rotation": [0, -1.5708, 0],
-    "size": [1.4, 1.8],
-    "description": "Minimalist landscape capturing the essence of natural calm."
+    "position": [0, -3.94, 1.6],
+    "rotation": [0, 0, 0],
+    "size": [1.0, 1.4],
+    "frame": "gilt",
+    "description": "A contemporary take on classical still life traditions."
   },
   {
     "id": 6,
-    "title": "Tidal Memory",
-    "artist": "Yuki Tanaka",
+    "title": "Composition in Blue",
+    "artist": "Marcus Chen",
     "type": "painting",
-    "position": [5.5, 1.6, 2.5],
-    "rotation": [0, -1.5708, 0],
-    "size": [1.6, 1.2],
-    "description": "Layers of color and texture evoking the rhythm of ocean waves."
+    "position": [3, -3.94, 1.65],
+    "rotation": [0, 0, 0],
+    "size": [1.6, 1.1],
+    "frame": "wood",
+    "description": "Geometric abstraction exploring the relationship between form and color."
   },
   {
     "id": 7,
+    "title": "Serenity",
+    "artist": "Yuki Tanaka",
+    "type": "painting",
+    "position": [5.94, 0, 1.65],
+    "rotation": [0, -1.5708, 0],
+    "size": [1.4, 1.0],
+    "frame": "wood",
+    "description": "Minimalist landscape capturing the essence of natural calm."
+  },
+  {
+    "id": 8,
+    "title": "Tidal Memory",
+    "artist": "Yuki Tanaka",
+    "type": "painting",
+    "position": [5.94, 2.5, 1.6],
+    "rotation": [0, -1.5708, 0],
+    "size": [1.2, 1.6],
+    "frame": "gilt",
+    "description": "Layers of color and texture evoking the rhythm of ocean waves."
+  },
+  {
+    "id": 9,
+    "title": "Digital Garden",
+    "artist": "Tom Eriksson",
+    "type": "painting",
+    "position": [-3, 3.94, 1.6],
+    "rotation": [0, 3.1416, 0],
+    "size": [1.6, 1.1],
+    "frame": "modern",
+    "description": "Technology meets nature in this generative artwork series."
+  },
+  {
+    "id": 10,
+    "title": "Balance",
+    "artist": "Anna Kowalski",
+    "type": "painting",
+    "position": [0, 3.94, 1.65],
+    "rotation": [0, 3.1416, 0],
+    "size": [1.0, 1.4],
+    "frame": "wood",
+    "description": "Exploring equilibrium through contrasting forms and weights."
+  },
+  {
+    "id": 11,
+    "title": "Nocturne",
+    "artist": "Marcus Chen",
+    "type": "painting",
+    "position": [3, 3.94, 1.6],
+    "rotation": [0, 3.1416, 0],
+    "size": [1.8, 1.2],
+    "frame": "gilt",
+    "description": "Night scenes rendered in deep blues and warm highlights."
+  },
+  {
+    "id": 12,
     "title": "Metamorphosis",
     "artist": "Anna Kowalski",
     "type": "sculpture",
@@ -70,53 +131,13 @@
     "description": "Organic form capturing the moment of transformation."
   },
   {
-    "id": 8,
+    "id": 13,
     "title": "Convergence",
     "artist": "David Park",
     "type": "sculpture",
-    "position": [2, 0, 1.5],
+    "position": [2, 1.5, 0],
     "rotation": [0, -0.3, 0],
     "model": "sculpture-02.glb",
     "description": "Geometric intersection exploring mathematical beauty."
-  },
-  {
-    "id": 9,
-    "title": "Whispers",
-    "artist": "Leila Hassan",
-    "type": "painting",
-    "position": [-5.5, 1.6, 2.5],
-    "rotation": [0, 1.5708, 0],
-    "size": [1.8, 1.2],
-    "description": "Abstract expressionism with delicate tonal variations."
-  },
-  {
-    "id": 10,
-    "title": "Digital Garden",
-    "artist": "Tom Eriksson",
-    "type": "painting",
-    "position": [-3, 1.6, 3.9],
-    "rotation": [0, 3.1416, 0],
-    "size": [2.0, 1.4],
-    "description": "Technology meets nature in this generative artwork series."
-  },
-  {
-    "id": 11,
-    "title": "Balance",
-    "artist": "Anna Kowalski",
-    "type": "painting",
-    "position": [0, 1.6, 3.9],
-    "rotation": [0, 3.1416, 0],
-    "size": [1.4, 1.8],
-    "description": "Exploring equilibrium through contrasting forms and weights."
-  },
-  {
-    "id": 12,
-    "title": "Nocturne",
-    "artist": "Marcus Chen",
-    "type": "painting",
-    "position": [3, 1.6, 3.9],
-    "rotation": [0, 3.1416, 0],
-    "size": [1.8, 1.2],
-    "description": "Night scenes rendered in deep blues and warm highlights."
   }
 ]
