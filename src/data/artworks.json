@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "title": "Ethereal Horizons",
+    "artist": "Elena Vasquez",
+    "type": "painting",
+    "position": [-5.5, 1.6, -0.1],
+    "rotation": [0, 1.5708, 0],
+    "size": [1.8, 1.2],
+    "description": "An exploration of light and space, where mountains dissolve into sky."
+  },
+  {
+    "id": 2,
+    "title": "Composition in Blue",
+    "artist": "Marcus Chen",
+    "type": "painting",
+    "position": [-3, 1.6, -3.9],
+    "rotation": [0, 0, 0],
+    "size": [2.0, 1.4],
+    "description": "Geometric abstraction exploring the relationship between form and color."
+  },
+  {
+    "id": 3,
+    "title": "Still Life with Flowers",
+    "artist": "Sofia Laurent",
+    "type": "painting",
+    "position": [0, 1.6, -3.9],
+    "rotation": [0, 0, 0],
+    "size": [1.2, 1.6],
+    "description": "A contemporary take on classical still life traditions."
+  },
+  {
+    "id": 4,
+    "title": "Urban Fragments",
+    "artist": "James Okafor",
+    "type": "painting",
+    "position": [3, 1.6, -3.9],
+    "rotation": [0, 0, 0],
+    "size": [1.6, 1.2],
+    "description": "Deconstructed cityscapes revealing hidden patterns in urban environments."
+  },
+  {
+    "id": 5,
+    "title": "Serenity",
+    "artist": "Yuki Tanaka",
+    "type": "painting",
+    "position": [5.5, 1.6, -0.1],
+    "rotation": [0, -1.5708, 0],
+    "size": [1.4, 1.8],
+    "description": "Minimalist landscape capturing the essence of natural calm."
+  },
+  {
+    "id": 6,
+    "title": "Tidal Memory",
+    "artist": "Yuki Tanaka",
+    "type": "painting",
+    "position": [5.5, 1.6, 2.5],
+    "rotation": [0, -1.5708, 0],
+    "size": [1.6, 1.2],
+    "description": "Layers of color and texture evoking the rhythm of ocean waves."
+  },
+  {
+    "id": 7,
+    "title": "Metamorphosis",
+    "artist": "Anna Kowalski",
+    "type": "sculpture",
+    "position": [-2, 0, 0],
+    "rotation": [0, 0.4, 0],
+    "model": "sculpture-01.glb",
+    "description": "Organic form capturing the moment of transformation."
+  },
+  {
+    "id": 8,
+    "title": "Convergence",
+    "artist": "David Park",
+    "type": "sculpture",
+    "position": [2, 0, 1.5],
+    "rotation": [0, -0.3, 0],
+    "model": "sculpture-02.glb",
+    "description": "Geometric intersection exploring mathematical beauty."
+  },
+  {
+    "id": 9,
+    "title": "Whispers",
+    "artist": "Leila Hassan",
+    "type": "painting",
+    "position": [-5.5, 1.6, 2.5],
+    "rotation": [0, 1.5708, 0],
+    "size": [1.8, 1.2],
+    "description": "Abstract expressionism with delicate tonal variations."
+  },
+  {
+    "id": 10,
+    "title": "Digital Garden",
+    "artist": "Tom Eriksson",
+    "type": "painting",
+    "position": [-3, 1.6, 3.9],
+    "rotation": [0, 3.1416, 0],
+    "size": [2.0, 1.4],
+    "description": "Technology meets nature in this generative artwork series."
+  },
+  {
+    "id": 11,
+    "title": "Balance",
+    "artist": "Anna Kowalski",
+    "type": "painting",
+    "position": [0, 1.6, 3.9],
+    "rotation": [0, 3.1416, 0],
+    "size": [1.4, 1.8],
+    "description": "Exploring equilibrium through contrasting forms and weights."
+  },
+  {
+    "id": 12,
+    "title": "Nocturne",
+    "artist": "Marcus Chen",
+    "type": "painting",
+    "position": [3, 1.6, 3.9],
+    "rotation": [0, 3.1416, 0],
+    "size": [1.8, 1.2],
+    "description": "Night scenes rendered in deep blues and warm highlights."
+  }
+]
