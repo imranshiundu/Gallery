@@ -1,0 +1,56 @@
+Gallery 🖼️
+You'll create a 3D scene in Blender and integrate it with a website.
+
+The situation 👀
+The art gallery in that trendy part of town attracts many visitors. It displays contemporary artworks and regularly changes the displays to give people a reason to return.
+
+They switch all the works monthly, meaning that some visitors who come less frequently could miss viewing an entire collection.
+
+The gallery curator thinks it could be interesting to create a virtual experience showcasing the works from the previous month. The curator asks you to trial it.
+
+You decide to help and agree to make a one-off representation of the current works so that the gallery can trial it next month.
+
+It will be presented on a touch-screen unit, without a mouse or keyboard.
+
+Functional requirements 📋
+You will create a 3D environment with Blender and display it in a web browser with Three.js. You can achieve the final result with standard DOM manipulation or another JavaScript framework of your choice. React Three Fiber is a good choice for React.
+
+Environment Creation
+Scene Setup: Design a simple 3D scene in Blender, such as a room with walls, a ceiling, and a floor. It will act as the virtual gallery space. Ensure the scene has realistic proportions so that viewers don't feel like they are taller than the walls, etc.
+Lighting and Textures: Add lighting to simulate the ambiance of an art gallery. Apply textures to walls, floors, and other surfaces to give the space a realistic look.
+Importing External Models: Download at least one external 3D model (such as furniture or sculptures) and import it into the gallery.
+Custom Model Creation: Create at least one custom 3D object in Blender. This can be a piece of art or any other object that would fit in the room. It cannot just be a cube. It must be something interesting like a chair, vase, etc.
+You can create textures yourself if you choose to. Otherwise, there are many freely available online, and Blender includes some default textures.
+
+Note: When importing external 3D models, check their size and polygon count. Models with a high number of polygons can significantly increase file sizes and affect performance. To optimize the models for use in your gallery, consider baking textures and reducing the polygon count where possible.
+
+Art Gallery
+
+Website integration
+Export your scene from Blender and import it into your chosen web application. You’ll need to research how to maintain website performance and how to export your Blender scene in the most efficient way.
+
+You need to find a way to enable the user to navigate around the room. This could be with "next" and "previous" buttons or some other way to navigate the artworks.
+
+Extra requirements 📚
+Baking
+Bake the textures in Blender so that you don’t need to add extra lighting in Three.js.
+
+Music
+Add background music to your scene to harmonize with the ambiance of the room. Users should be able to toggle the music on or off.
+
+Bonus functionality 🎁
+You're welcome to implement other bonuses as you see fit. But anything you implement must not change the default functional behavior of your project.
+
+You may use additional feature flags, command line arguments or separate builds to switch your bonus functionality on.
+
+Useful links
+Blender Cheatsheet
+3D Art Gallery Tutorial
+Loading models with ThreeJS
+Drei
+What you'll learn 🧠
+Blender basics
+3D modeling and texturing
+Interactive 3D environments
+Exporting and importing 3D models
+Three.js

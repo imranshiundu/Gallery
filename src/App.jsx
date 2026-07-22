@@ -2,6 +2,7 @@ import React, { useState, Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Gallery from './components/Gallery'
 import LoadingScreen from './components/LoadingScreen'
+import EntryScreen from './components/EntryScreen'
 import Navigation from './components/Navigation'
 import InfoPanel from './components/InfoPanel'
 import AudioToggle from './components/AudioToggle'
@@ -9,11 +10,14 @@ import { AudioProvider } from './hooks/useAudio'
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
+  const [entered, setEntered] = useState(false)
 
   return (
     <AudioProvider>
       <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-        <LoadingScreen onComplete={() => setLoaded(true)} />
+        {!entered && <EntryScreen onEnter={() => setEntered(true)} />}
+        
+        {entered && !loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
         
         <Canvas
           className="gallery-canvas"
@@ -30,11 +34,11 @@ export default function App() {
           <fog attach="fog" args={['#1a1a1a', 10, 30]} />
           
           <Suspense fallback={null}>
-            <Gallery loaded={loaded} />
+            <Gallery loaded={entered && loaded} />
           </Suspense>
         </Canvas>
 
-        {loaded && (
+        {entered && loaded && (
           <div className="overlay">
             <div className="gallery-title">Gallery</div>
             <AudioToggle />

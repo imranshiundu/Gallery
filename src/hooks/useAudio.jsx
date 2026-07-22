@@ -4,12 +4,10 @@ const AudioContext = createContext(null)
 
 export function AudioProvider({ children }) {
   const [isPlaying, setIsPlaying] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
   const audioRef = useRef(null)
-  const audioContextRef = useRef(null)
 
   useEffect(() => {
-    const audio = new Audio()
+    const audio = new Audio('/audio/gallery_ambient.mp3')
     audio.loop = true
     audio.volume = 0.15
     audio.preload = 'auto'
@@ -18,6 +16,7 @@ export function AudioProvider({ children }) {
     return () => {
       if (audioRef.current) {
         audioRef.current.pause()
+        audioRef.current.src = ''
         audioRef.current = null
       }
     }
@@ -26,19 +25,12 @@ export function AudioProvider({ children }) {
   const toggle = useCallback(async () => {
     if (!audioRef.current) return
 
-    if (!audioContextRef.current) {
-      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)()
-    }
-
-    if (audioContextRef.current.state === 'suspended') {
-      await audioContextRef.current.resume()
-    }
-
     if (isPlaying) {
       audioRef.current.pause()
       setIsPlaying(false)
     } else {
       try {
+        audioRef.current.currentTime = 0
         await audioRef.current.play()
         setIsPlaying(true)
       } catch (err) {
@@ -47,16 +39,8 @@ export function AudioProvider({ children }) {
     }
   }, [isPlaying])
 
-  const loadTrack = useCallback((src) => {
-    if (audioRef.current) {
-      audioRef.current.src = src
-      audioRef.current.load()
-      setIsLoaded(true)
-    }
-  }, [])
-
   return (
-    <AudioContext.Provider value={{ isPlaying, isLoaded, toggle, loadTrack }}>
+    <AudioContext.Provider value={{ isPlaying, toggle }}>
       {children}
     </AudioContext.Provider>
   )

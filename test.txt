@@ -1,0 +1,56 @@
+Mandatory
+A 3D gallery scene is created using Blender
+
+The scene includes a room with walls, ceiling, and floor, proportioned realistically to human scale.
+
+Scene includes appropriate lighting and textures
+
+Lighting simulates gallery ambiance, and textures are applied to surfaces such as walls and floors.
+
+At least one external 3D model is imported into the Blender scene
+
+Model is relevant to the gallery context, such as furniture or a sculpture.
+
+At least one custom 3D model is created in Blender
+
+The model is original and more complex than a basic cube (e.g., chair, vase, or artwork).
+
+The Blender scene is exported and rendered using Three.js
+
+The exported 3D scene is successfully integrated and displayed within a web browser.
+
+Users can navigate the gallery using provided controls
+
+Navigation works on a touchscreen device without mouse/keyboard (e.g., swipe gestures or on-screen buttons).
+
+Imported 3D models are optimized for performance
+
+Polygon count is reasonable and performance is not negatively impacted.
+
+No runtime errors or console warnings occur during normal use
+
+The project runs cleanly in a modern browser, including on touchscreen devices.
+
+Extra
+Textures are baked in Blender to optimize performance
+
+Lighting is pre-baked into textures, avoiding the need for dynamic lighting in Three.js.
+
+Users can toggle background music on or off
+
+Music is included and controllable via UI.
+
+The virtual gallery looks and feels realistic
+
+Based on proportions, textures, and lighting.
+
+Navigation around the gallery is intuitive and accessible on a touchscreen
+
+Navigation should be smooth and discoverable.
+
+Bonus features are clearly separated and do not affect base functionality
+
+Bonus functionality (e.g., filters, animations) is optional and well integrated.
+
+
+
