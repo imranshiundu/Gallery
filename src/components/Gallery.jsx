@@ -121,6 +121,10 @@ export default function Gallery({ loaded }) {
   return (
     <group ref={groupRef}>
       <CameraController currentIndex={currentIndex} />
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[5, 5, 5]} intensity={0.8} color="#fff8f0" />
+      <directionalLight position={[-5, 5, 5]} intensity={0.6} color="#fff5e8" />
+      <pointLight position={[0, 3, 0]} intensity={0.5} color="#ffffff" distance={10} />
       <GalleryScene />
     </group>
   )
