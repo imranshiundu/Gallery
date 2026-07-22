@@ -65,6 +65,11 @@ function CameraController({ currentIndex }) {
 
 export { cameraWaypoints }
 
+function ExternalModel({ position, scale }) {
+  const { scene } = useGLTF('/models/plant.glb')
+  return <primitive object={scene} position={position} scale={scale} />
+}
+
 function GalleryScene() {
   const { scene } = useGLTF('/models/gallery.glb')
   const sceneRef = useRef()
@@ -79,7 +84,13 @@ function GalleryScene() {
     }
   }, [scene])
 
-  return <primitive ref={sceneRef} object={scene} />
+  return (
+    <group>
+      <primitive ref={sceneRef} object={scene} />
+      <ExternalModel position={[4.5, 0, 0]} scale={[0.5, 0.5, 0.5]} />
+      <ExternalModel position={[-4.5, -2, 0]} scale={[0.4, 0.4, 0.4]} />
+    </group>
+  )
 }
 
 export default function Gallery({ loaded }) {
