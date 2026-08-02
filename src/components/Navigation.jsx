@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react'
-import { cameraWaypoints } from './Gallery'
+import { cameraWaypoints } from '../data/cameraWaypoints'
 
 export default function Navigation() {
   const [currentIndex, setCurrentIndex] = useState(0)
