@@ -30,7 +30,7 @@ export default function LoadingScreen({ onComplete }) {
 
   return (
     <div className={`loading-screen ${fadeOut ? 'fade-out' : ''}`}>
-      <div className="loading-title">Gallery</div>
+      <div className="loading-title">gallery</div>
       <div className="loading-bar-container">
         <div 
           className="loading-bar" 

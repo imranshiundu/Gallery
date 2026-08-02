@@ -26,8 +26,8 @@ export default function App() {
           }}
           shadows={false}
         >
-          <color attach="background" args={['#1a1a1a']} />
-          <fog attach="fog" args={['#1a1a1a', 10, 30]} />
+          <color attach="background" args={['#16181d']} />
+          <fog attach="fog" args={['#16181d', 10, 30]} />
           
           <Suspense fallback={null}>
             <Gallery loaded={entered} />
