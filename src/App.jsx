@@ -15,13 +15,9 @@ export default function App() {
   return (
     <AudioProvider>
       <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-        {!entered && <EntryScreen onEnter={() => setEntered(true)} />}
-        
-        {entered && !loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
-        
         <Canvas
           className="gallery-canvas"
-          camera={{ position: [0, 1.6, 0], fov: 60, near: 0.1, far: 100 }}
+          camera={{ position: [0, 1.6, 2.5], fov: 45, near: 0.1, far: 100 }}
           dpr={[1, 1.5]}
           gl={{ 
             antialias: true,
@@ -34,13 +30,16 @@ export default function App() {
           <fog attach="fog" args={['#1a1a1a', 10, 30]} />
           
           <Suspense fallback={null}>
-            <Gallery loaded={entered && loaded} />
+            <Gallery loaded={entered} />
           </Suspense>
         </Canvas>
 
-        {entered && loaded && (
+        {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
+
+        {loaded && !entered && <EntryScreen onEnter={() => setEntered(true)} />}
+
+        {entered && (
           <div className="overlay">
-            <div className="gallery-title">Gallery</div>
             <AudioToggle />
             <Navigation />
             <InfoPanel />
