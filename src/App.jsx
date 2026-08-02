@@ -40,6 +40,7 @@ export default function App() {
 
         {entered && (
           <div className="overlay">
+            <div className="gallery-title">gallery</div>
             <AudioToggle />
             <Navigation />
             <InfoPanel />

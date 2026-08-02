@@ -14,9 +14,6 @@ const cameraWaypoints = [
   { position: [2.8, 1.8, 2.6], lookAt: [5.8, 1.8, 2.5], fov: 42 },
   { position: [-2.8, 1.6, 1.2], lookAt: [-3.2, 1.6, 3.8], fov: 40 },
   { position: [0, 1.5, 1.8], lookAt: [0, 1.5, 3.8], fov: 38 },
-  { position: [2.8, 1.6, 1.2], lookAt: [3.2, 1.6, 3.8], fov: 40 },
-  { position: [-0.3, 1.7, 1.5], lookAt: [-2, 1.0, 0.5], fov: 35 },
-  { position: [3.2, 1.7, 1.5], lookAt: [2, 1.5, 0.5], fov: 35 },
 ]
 
 function easeInOutCubic(t) {
@@ -283,26 +280,6 @@ export default function Gallery({ loaded }) {
         intensity={0.7} 
         color="#fff9f0"
         distance={6}
-        decay={2}
-      />
-      <spotLight 
-        position={[-2, 2.8, 0.5]} 
-        target={[-2, 1.0, 0.5]} 
-        angle={0.4} 
-        penumbra={0.6} 
-        intensity={0.6} 
-        color="#fff9f0"
-        distance={4}
-        decay={2}
-      />
-      <spotLight 
-        position={[2, 2.8, 1.5]} 
-        target={[2, 1.5, 0.5]} 
-        angle={0.4} 
-        penumbra={0.6} 
-        intensity={0.6} 
-        color="#fff9f0"
-        distance={4}
         decay={2}
       />
       

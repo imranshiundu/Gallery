@@ -119,25 +119,5 @@
     "size": [1.8, 1.2],
     "frame": "gilt",
     "description": "Night scenes rendered in deep blues and warm highlights."
-  },
-  {
-    "id": 12,
-    "title": "Metamorphosis",
-    "artist": "Anna Kowalski",
-    "type": "sculpture",
-    "position": [-2, 0, 0],
-    "rotation": [0, 0.4, 0],
-    "model": "sculpture-01.glb",
-    "description": "Organic form capturing the moment of transformation."
-  },
-  {
-    "id": 13,
-    "title": "Convergence",
-    "artist": "David Park",
-    "type": "sculpture",
-    "position": [2, 1.5, 0],
-    "rotation": [0, -0.3, 0],
-    "model": "sculpture-02.glb",
-    "description": "Geometric intersection exploring mathematical beauty."
   }
 ]
