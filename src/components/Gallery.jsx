@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect, useMemo } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
 import { useGLTF, useTexture, Environment, Lightformer, MeshReflectorMaterial } from '@react-three/drei'
 import { cameraWaypoints, easeInOutCubic } from '../data/cameraWaypoints'
+import { useAudio } from '../hooks/useAudio'
 import * as THREE from 'three'
 
 function CameraController({ currentIndex }) {
@@ -335,6 +336,18 @@ function GalleryScene() {
 
 export default function Gallery() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const { playWhoosh, playChime } = useAudio()
+  const firstNav = useRef(true)
+
+  useEffect(() => {
+    if (firstNav.current) {
+      firstNav.current = false
+      return
+    }
+    playWhoosh()
+    const chimeTimer = setTimeout(() => playChime(), 1050)
+    return () => clearTimeout(chimeTimer)
+  }, [currentIndex, playWhoosh, playChime])
 
   useEffect(() => {
     const handleKeyDown = (e) => {

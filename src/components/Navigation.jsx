@@ -1,9 +1,11 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { cameraWaypoints } from '../data/cameraWaypoints'
+import { useAudio } from '../hooks/useAudio'
 
 export default function Navigation() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [showHint, setShowHint] = useState(true)
+  const { playClick } = useAudio()
 
   useEffect(() => {
     const handleNavChange = (e) => {
@@ -15,28 +17,31 @@ export default function Navigation() {
 
   const goToNext = useCallback(() => {
     if (currentIndex < cameraWaypoints.length - 1) {
-      window.dispatchEvent(new CustomEvent('gallery-set-index', { 
-        detail: { index: currentIndex + 1 } 
+      playClick()
+      window.dispatchEvent(new CustomEvent('gallery-set-index', {
+        detail: { index: currentIndex + 1 }
       }))
       setShowHint(false)
     }
-  }, [currentIndex])
+  }, [currentIndex, playClick])
 
   const goToPrev = useCallback(() => {
     if (currentIndex > 0) {
-      window.dispatchEvent(new CustomEvent('gallery-set-index', { 
-        detail: { index: currentIndex - 1 } 
+      playClick()
+      window.dispatchEvent(new CustomEvent('gallery-set-index', {
+        detail: { index: currentIndex - 1 }
       }))
       setShowHint(false)
     }
-  }, [currentIndex])
+  }, [currentIndex, playClick])
 
   const goToIndex = useCallback((index) => {
-    window.dispatchEvent(new CustomEvent('gallery-set-index', { 
-      detail: { index } 
+    if (index !== currentIndex) playClick()
+    window.dispatchEvent(new CustomEvent('gallery-set-index', {
+      detail: { index }
     }))
     setShowHint(false)
-  }, [])
+  }, [currentIndex, playClick])
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHint(false), 5000)
