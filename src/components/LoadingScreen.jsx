@@ -31,17 +31,22 @@ export default function LoadingScreen({ onComplete }) {
   }, [progress])
 
   useEffect(() => {
-    const elapsed = Date.now() - mountedAt.current
-    const ready = total === 0 || progress >= 100
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - mountedAt.current
+      const ready = total === 0 || progress >= 100
 
-    if (!doneRef.current && ready && elapsed >= 1600) {
-      doneRef.current = true
-      setTimeout(() => setFadeOut(true), 350)
-      setTimeout(() => {
-        setVisible(false)
-        onComplete()
-      }, 1150)
-    }
+      if (!doneRef.current && ready && elapsed >= 1600) {
+        doneRef.current = true
+        clearInterval(interval)
+        setTimeout(() => setFadeOut(true), 350)
+        setTimeout(() => {
+          setVisible(false)
+          onComplete()
+        }, 1150)
+      }
+    }, 200)
+
+    return () => clearInterval(interval)
   }, [progress, total, onComplete])
 
   if (!visible) return null
