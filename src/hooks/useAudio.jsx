@@ -175,7 +175,10 @@ class GalleryAudioEngine {
   start() {
     this._ensure()
     if (!this.ctx) return
-    this.ctx.resume()
+    const resumed = this.ctx.resume()
+    if (resumed && typeof resumed.catch === 'function') {
+      resumed.catch(() => {})
+    }
     const now = this.ctx.currentTime
     this.master.gain.cancelScheduledValues(now)
     this.master.gain.setValueAtTime(this.master.gain.value, now)
@@ -302,8 +305,14 @@ export function AudioProvider({ children }) {
   }, [])
 
   const start = useCallback(() => {
-    engine.start()
-    if (engine.ctx) setIsPlaying(true)
+    try {
+      engine.start()
+      setIsPlaying(engine.running)
+    } catch (err) {
+      console.warn('Audio engine unavailable:', err)
+      engine.running = false
+      setIsPlaying(false)
+    }
   }, [])
 
   const stop = useCallback(() => {

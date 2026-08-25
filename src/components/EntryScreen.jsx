@@ -14,8 +14,12 @@ export default function EntryScreen({ onEnter }) {
   }, [])
 
   const handleEnter = () => {
-    start()
     setExiting(true)
+    try {
+      start()
+    } catch (err) {
+      console.warn('Audio unavailable, entering silently:', err)
+    }
     setTimeout(() => onEnter(), 900)
   }
 
