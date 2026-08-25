@@ -17,14 +17,14 @@ export default function App() {
       <div style={{ width: '100%', height: '100%', position: 'relative' }}>
         <Canvas
           className="gallery-canvas"
-          camera={{ position: [0, 1.6, 2.5], fov: 45, near: 0.1, far: 100 }}
+          camera={{ position: [3.6, 2.4, 2.9], fov: 55, near: 0.1, far: 100 }}
           dpr={[1, 1.5]}
-          gl={{ 
+          gl={{
             antialias: true,
             alpha: false,
             powerPreference: 'high-performance'
           }}
-          shadows={false}
+          shadows="soft"
         >
           <color attach="background" args={['#16181d']} />
           <fog attach="fog" args={['#16181d', 10, 30]} />
