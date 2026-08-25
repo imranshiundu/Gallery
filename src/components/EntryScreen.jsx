@@ -36,16 +36,27 @@ export default function EntryScreen({ onEnter }) {
       </div>
 
       <div className="entry-marquee" aria-hidden="true">
-        <div className="marquee-track">
-          {[...THUMBS, ...THUMBS].map((src, i) => (
-            <figure className={`marquee-card ${i % 3 === 0 ? 'tilt-l' : i % 3 === 1 ? 'tilt-r' : ''}`} key={i}>
-              <img src={src} alt="" loading="eager" draggable="false" />
-            </figure>
-          ))}
+        <div className="marquee-row">
+          <div className="marquee-track">
+            {[...THUMBS, ...THUMBS].map((src, i) => (
+              <figure className={`marquee-card ${i % 3 === 0 ? 'tilt-l' : i % 3 === 1 ? 'tilt-r' : ''}`} key={i}>
+                <img src={src} alt="" loading="eager" draggable="false" />
+              </figure>
+            ))}
+          </div>
         </div>
-        <div className="marquee-fade marquee-fade-l"></div>
-        <div className="marquee-fade marquee-fade-r"></div>
+        <div className="marquee-row">
+          <div className="marquee-track track-reverse">
+            {[...THUMBS.slice(6), ...THUMBS.slice(0, 6), ...THUMBS.slice(6), ...THUMBS.slice(0, 6)].map((src, i) => (
+              <figure className={`marquee-card ${i % 3 === 2 ? 'tilt-l' : i % 3 === 0 ? 'tilt-r' : ''}`} key={i}>
+                <img src={src} alt="" loading="eager" draggable="false" />
+              </figure>
+            ))}
+          </div>
+        </div>
       </div>
+
+      <div className="entry-scrim" aria-hidden="true"></div>
 
       <div className="entry-content">
         <div className="entry-badge">Virtual Exhibition</div>

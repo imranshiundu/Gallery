@@ -409,26 +409,36 @@
 
 .entry-marquee {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
   right: 0;
-  height: 150px;
-  overflow: hidden;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  pointer-events: none;
   z-index: 1;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 85%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 85%, transparent 100%);
+  opacity: 0.55;
+  filter: blur(1.5px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.marquee-row {
+  overflow: hidden;
+  width: 100%;
 }
 
 .marquee-track {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.4rem;
   width: max-content;
-  padding-top: 1.75rem;
-  animation: marqueeScroll 55s linear infinite;
+  padding: 12px 0;
+  animation: marqueeScroll 70s linear infinite;
 }
 
-.entry-screen:hover .marquee-track {
-  animation-play-state: paused;
+.track-reverse {
+  animation: marqueeScrollRev 85s linear infinite;
 }
 
 @keyframes marqueeScroll {
@@ -436,58 +446,42 @@
   to { transform: translateX(-50%); }
 }
 
+@keyframes marqueeScrollRev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
 .marquee-card {
   flex-shrink: 0;
   margin: 0;
-  padding: 6px;
-  background: oklch(0.16 0.02 260 / 0.8);
+  padding: 7px;
+  background: oklch(0.15 0.02 260 / 0.9);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease-out;
+  border-radius: 6px;
+  box-shadow: var(--shadow-lg);
 }
 
 .marquee-card img {
   display: block;
-  width: 150px;
-  height: 100px;
+  width: 215px;
+  height: 140px;
   object-fit: cover;
-  border-radius: 2px;
-  filter: saturate(0.85) brightness(0.9);
-  transition: filter 0.35s ease-out;
+  border-radius: 3px;
+  filter: saturate(0.88) brightness(0.82);
   user-select: none;
 }
 
-.marquee-card:hover {
-  transform: translateY(-6px) scale(1.06) rotate(0deg) !important;
-  box-shadow: var(--shadow-lg), 0 0 24px oklch(0.68 0.14 75 / 0.18);
-  z-index: 2;
-}
-
-.marquee-card:hover img {
-  filter: saturate(1.1) brightness(1.05);
-}
-
-.marquee-card.tilt-l { transform: rotate(-2deg); }
+.marquee-card.tilt-l { transform: rotate(-2.2deg); }
 .marquee-card.tilt-r { transform: rotate(2deg); }
 
-.marquee-fade {
+.entry-scrim {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 120px;
-  z-index: 2;
+  inset: 0;
+  z-index: 5;
   pointer-events: none;
-}
-
-.marquee-fade-l {
-  left: 0;
-  background: linear-gradient(to right, var(--bg), transparent);
-}
-
-.marquee-fade-r {
-  right: 0;
-  background: linear-gradient(to left, var(--bg), transparent);
+  background:
+    radial-gradient(ellipse 48% 44% at 50% 52%, oklch(0.09 0.02 260 / 0.9) 0%, oklch(0.09 0.02 260 / 0.6) 58%, transparent 80%),
+    linear-gradient(to bottom, oklch(0.09 0.02 260 / 0.75), transparent 22%, transparent 78%, oklch(0.09 0.02 260 / 0.75));
 }
 
 .entry-content {
@@ -817,10 +811,6 @@
     animation: none !important;
   }
 
-  .marquee-track {
-    transform: translateX(-25%);
-  }
-
   * {
     transition-duration: 0.01ms !important;
   }
@@ -830,7 +820,7 @@
   .nav-container {
     bottom: 1rem;
   }
-  
+
   .info-panel {
     bottom: 5rem;
     left: 1rem;
@@ -838,29 +828,44 @@
     transform: none;
     max-width: none;
   }
-  
+
   .info-panel.hidden {
     transform: translateY(10px);
   }
-  
+
   .entry-features {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .feature {
     width: 100%;
     max-width: 280px;
     justify-content: center;
   }
-  
+
   .gallery-title {
     top: 1rem;
     left: 1rem;
   }
-  
+
   .audio-toggle {
     top: 1rem;
     right: 1rem;
   }
+
+  .entry-marquee {
+    opacity: 0.4;
+    gap: 1rem;
+  }
+
+  .marquee-card img {
+    width: 140px;
+    height: 92px;
+  }
+
+  .marquee-track {
+    gap: 1rem;
+  }
+}
 }
