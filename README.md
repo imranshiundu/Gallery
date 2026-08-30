@@ -2,20 +2,26 @@
 
 A browser-based 3D art gallery built with React Three Fiber. Navigate through a realistic virtual room with 11 framed paintings, reflective floors, dynamic spotlights, and generative ambient audio.
 
-**Live demo:** [https://gallery-imranshiundu.vercel.app](https://gallery-imranshiundu.vercel.app)
-
 ![gallery demo](gallery.gif)
 
 ---
 
 ## Quick start
 
-```bash
-# clone
-git clone https://github.com/imranshiundu/gallery.git
-cd gallery
+**Live demo:** [https://gallery-imran.vercel.app](https://gallery-imran.vercel.app)
 
-# install
+Clone from your preferred remote:
+
+```bash
+# GitHub
+git clone https://github.com/imranshiundu/gallery.git
+
+# Gitea (Kood)
+git clone https://gitea.kood.tech/imranshiundu/gallery.git
+```
+
+```bash
+cd gallery
 npm install
 
 # dev server (http://localhost:5173)
