@@ -22,7 +22,9 @@ export default function LoadingScreen({ onComplete }) {
     const tick = () => {
       setDisplayed((prev) => {
         const target = doneRef.current ? 100 : Math.min(progress, 100)
-        return prev + (target - prev) * 0.12
+        if (target >= 100) return 100
+        const next = prev + (target - prev) * 0.18
+        return Math.abs(next - target) < 0.5 ? target : next
       })
       raf = requestAnimationFrame(tick)
     }

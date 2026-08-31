@@ -250,3 +250,13 @@ Tested on Chrome 120+, Firefox 121+, Safari 17+, Edge 120+. Requires WebGL 2.0 a
 ## License
 
 Private project. Contact the author for usage rights.
+
+---
+
+## Additional features (out of scope)
+
+1. **Auto-play tour** — Gallery auto-advances through every painting at a configurable interval; pauses on interaction. Disabled by default, activated via `?tour=auto`.
+2. **Painting zoom** — Double-tap / double-click any painting to zoom in to a close-up detail view with smooth camera lerp; double-tap again to return.
+3. **Ambient particles** — Subtle floating dust motes drift through the room, adding depth and atmosphere without impacting performance.
+4. **Per-painting URL sharing** — Each painting's nav index is synced to `?view=N` in the address bar; copy the URL to deep-link to a specific artwork.
+5. **Keyboard shortcuts** — `1`–`9`, `0`, `-`, `=` jump directly to paintings 1–12; `T` toggles tour; `M` mutes; `F` toggles fullscreen.

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import artworksData from '../data/artworks.json'
+import { cameraWaypoints } from '../data/cameraWaypoints'
 
 export default function InfoPanel() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -18,21 +19,29 @@ export default function InfoPanel() {
     return () => window.removeEventListener('gallery-nav-change', handleNavChange)
   }, [])
 
-  const artwork = currentIndex > 0 ? artworksData[currentIndex - 1] : null
+  const wp = cameraWaypoints[currentIndex]
+  if (!wp || wp.type === 'overview') return null
 
-  if (!artwork) return null
+  const item = wp.type === 'sculpture'
+    ? { title: wp.title, artist: wp.artist, description: wp.description, kind: 'Sculpture' }
+    : (() => {
+        const a = artworksData[currentIndex - 1]
+        return a ? { ...a, kind: 'Painting' } : null
+      })()
+
+  if (!item) return null
 
   return (
-    <div 
+    <div
       className={`info-panel ${!isVisible ? 'hidden' : ''}`}
       style={{ opacity, transition: 'opacity 200ms ease-out' }}
     >
-      <div className="artwork-title">{artwork.title}</div>
-      <div className="artwork-artist">{artwork.artist}</div>
+      <div className="artwork-title">{item.title}</div>
+      <div className="artwork-artist">{item.artist}</div>
       <div className="artwork-meta">
-        {artwork.frame && <span className="frame-type">{artwork.frame} frame</span>}
+        <span className="frame-type">{item.kind}{item.frame ? ` · ${item.frame} frame` : ''}</span>
       </div>
-      <div className="artwork-description">{artwork.description}</div>
+      <div className="artwork-description">{item.description}</div>
     </div>
   )
 }

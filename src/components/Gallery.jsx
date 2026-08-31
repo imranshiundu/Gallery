@@ -3,6 +3,7 @@ import { useThree, useFrame } from '@react-three/fiber'
 import { useGLTF, useTexture, Environment, Lightformer, MeshReflectorMaterial } from '@react-three/drei'
 import { cameraWaypoints, easeInOutCubic } from '../data/cameraWaypoints'
 import { useAudio } from '../hooks/useAudio'
+import { bonusDisabled } from '../hooks/bonusFlag'
 import * as THREE from 'three'
 
 function CameraController({ currentIndex }) {
@@ -160,47 +161,46 @@ function Artwork({ def, texture }) {
   )
 }
 
-function GalleryWindow({ position, rotY }) {
-  const W = 2.2
-  const H = 1.8
-  const ft = 0.07
-  const fd = 0.12
+function GallerySkylight({ position, rotY = 0 }) {
+  const W = 1.4
+  const H = 1.6
+  const ft = 0.06
+  const frameColor = '#141416'
 
   return (
     <group position={position} rotation={[0, rotY, 0]}>
-      <mesh position={[-(W / 2 + ft / 2), 0, fd / 2]}>
-        <boxGeometry args={[ft, H + ft * 2, fd]} />
-        <meshStandardMaterial color="#141416" metalness={0.7} roughness={0.35} />
+      <mesh position={[-(W / 2 + ft / 2), 0, 0]}>
+        <boxGeometry args={[ft, ft, H + ft * 2]} />
+        <meshStandardMaterial color={frameColor} metalness={0.7} roughness={0.35} />
       </mesh>
-      <mesh position={[W / 2 + ft / 2, 0, fd / 2]}>
-        <boxGeometry args={[ft, H + ft * 2, fd]} />
-        <meshStandardMaterial color="#141416" metalness={0.7} roughness={0.35} />
+      <mesh position={[W / 2 + ft / 2, 0, 0]}>
+        <boxGeometry args={[ft, ft, H + ft * 2]} />
+        <meshStandardMaterial color={frameColor} metalness={0.7} roughness={0.35} />
       </mesh>
-      <mesh position={[0, H / 2 + ft / 2, fd / 2]}>
-        <boxGeometry args={[W + ft * 2, ft, fd]} />
-        <meshStandardMaterial color="#141416" metalness={0.7} roughness={0.35} />
+      <mesh position={[0, 0, H / 2 + ft / 2]}>
+        <boxGeometry args={[W + ft * 2, ft, ft]} />
+        <meshStandardMaterial color={frameColor} metalness={0.7} roughness={0.35} />
       </mesh>
-      <mesh position={[0, -(H / 2 + ft / 2), fd / 2]}>
-        <boxGeometry args={[W + ft * 2, ft, fd]} />
-        <meshStandardMaterial color="#141416" metalness={0.7} roughness={0.35} />
+      <mesh position={[0, 0, -(H / 2 + ft / 2)]}>
+        <boxGeometry args={[W + ft * 2, ft, ft]} />
+        <meshStandardMaterial color={frameColor} metalness={0.7} roughness={0.35} />
       </mesh>
-      <mesh position={[0, 0, fd / 2]}>
-        <boxGeometry args={[0.05, H, fd * 0.6]} />
-        <meshStandardMaterial color="#141416" metalness={0.7} roughness={0.35} />
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[ft * 0.6, ft * 0.6, H]} />
+        <meshStandardMaterial color={frameColor} metalness={0.7} roughness={0.35} />
       </mesh>
-      <mesh position={[0, 0, fd / 2]}>
-        <boxGeometry args={[W, 0.05, fd * 0.6]} />
-        <meshStandardMaterial color="#141416" metalness={0.7} roughness={0.35} />
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[W, ft * 0.6, ft * 0.6]} />
+        <meshStandardMaterial color={frameColor} metalness={0.7} roughness={0.35} />
       </mesh>
 
-      <mesh position={[0, 0, fd - 0.02]}>
+      <mesh position={[0, -ft / 2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[W, H]} />
-        <meshStandardMaterial color="#bcd6e4" transparent opacity={0.18} roughness={0.05} metalness={0.1} />
+        <meshStandardMaterial color="#bcd6e4" transparent opacity={0.22} roughness={0.05} metalness={0.1} side={THREE.DoubleSide} />
       </mesh>
-
-      <mesh position={[0, 0, -0.08]} rotation={[0, Math.PI, 0]}>
+      <mesh position={[0, ft / 2, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <planeGeometry args={[W + 0.6, H + 0.6]} />
-        <meshBasicMaterial color="#e6eef6" toneMapped={false} />
+        <meshBasicMaterial color="#e6eef6" toneMapped={false} side={THREE.DoubleSide} />
       </mesh>
     </group>
   )
@@ -210,16 +210,23 @@ function DownlightCans() {
   return (
     <group>
       {[...ART_SPOTS.map((s) => s.position), [-2, 3.2, 0.6], [2, 3.2, -0.9]].map((p, i) => (
-        <mesh key={i} position={[p[0], 3.43, p[2]]}>
-          <cylinderGeometry args={[0.05, 0.065, 0.14, 20]} />
-          <meshStandardMaterial color="#141416" metalness={0.6} roughness={0.4} side={THREE.DoubleSide} />
-        </mesh>
+        <group key={i} position={[p[0], 3.43, p[2]]}>
+          <mesh>
+            <cylinderGeometry args={[0.05, 0.065, 0.14, 20]} />
+            <meshStandardMaterial color="#141416" metalness={0.6} roughness={0.4} side={THREE.DoubleSide} />
+          </mesh>
+          <mesh position={[0, -0.072, 0]}>
+            <cylinderGeometry args={[0.046, 0.046, 0.004, 20]} />
+            <meshBasicMaterial color="#fff4d6" toneMapped={false} />
+          </mesh>
+          <pointLight position={[0, -0.08, 0]} intensity={0.6} distance={0.4} decay={2} color="#fff4d6" />
+        </group>
       ))}
     </group>
   )
 }
 
-function AimedSpot({ position, targetPosition, intensity = 55, angle = 0.34 }) {
+function AimedSpot({ position, targetPosition, intensity = 55, angle = 0.34, castShadow = true }) {
   const light = useRef()
   const targetObj = useRef()
 
@@ -241,6 +248,10 @@ function AimedSpot({ position, targetPosition, intensity = 55, angle = 0.34 }) {
         color="#fff6e8"
         distance={11}
         decay={2}
+        castShadow={castShadow}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-bias={-0.0004}
       />
     </>
   )
@@ -277,6 +288,7 @@ function ExternalModel({ position, scale }) {
 function GalleryScene() {
   const { scene } = useGLTF('/models/gallery.glb')
   const textures = useTexture(PAINTINGS.map((p) => `/textures/paintings/${p.img}`))
+  const bonusOff = bonusDisabled()
 
   useMemo(() => {
     const doomed = []
@@ -304,27 +316,33 @@ function GalleryScene() {
     <group>
       <primitive object={scene} />
 
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, 0]} receiveShadow>
-        <planeGeometry args={[12, 8]} />
-        <MeshReflectorMaterial
-          color="#191a1e"
-          metalness={0.25}
-          roughness={0.82}
-          resolution={512}
-          mirror={0.35}
-          mixBlur={5}
-          mixStrength={2.2}
-          blur={[250, 60]}
-        />
-      </mesh>
+      {bonusOff ? (
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, 0]} receiveShadow>
+          <planeGeometry args={[12, 8]} />
+          <meshStandardMaterial color="#191a1e" roughness={0.82} metalness={0.2} />
+        </mesh>
+      ) : (
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, 0]} receiveShadow>
+          <planeGeometry args={[12, 8]} />
+          <MeshReflectorMaterial
+            color="#191a1e"
+            metalness={0.25}
+            roughness={0.82}
+            resolution={512}
+            mirror={0.35}
+            mixBlur={5}
+            mixStrength={2.2}
+            blur={[250, 60]}
+          />
+        </mesh>
+      )}
 
       {PAINTINGS.map((def, i) => (
         <Artwork key={def.img} def={def} texture={textures[i]} />
       ))}
 
-      <GalleryWindow position={[-2, 2.25, -3.93]} rotY={0} />
-      <GalleryWindow position={[2, 2.25, -3.93]} rotY={0} />
-      <GalleryWindow position={[-5.93, 2.25, 0]} rotY={Math.PI / 2} />
+      <GallerySkylight position={[-3.2, 3.48, 0]} />
+      <GallerySkylight position={[3.2, 3.48, 0]} />
 
       <DownlightCans />
 
@@ -338,6 +356,7 @@ export default function Gallery() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const { playWhoosh, playChime } = useAudio()
   const firstNav = useRef(true)
+  const bonusOff = bonusDisabled()
 
   useEffect(() => {
     if (firstNav.current) {
@@ -400,10 +419,10 @@ export default function Gallery() {
     <group>
       <CameraController currentIndex={currentIndex} />
 
-      <ambientLight intensity={0.3} color="#fff4e6" />
+<ambientLight intensity={0.18} color="#fff4e6" />
       <directionalLight
         position={[4, 7, 3]}
-        intensity={0.85}
+        intensity={0.45}
         color="#fff2e0"
         castShadow
         shadow-mapSize-width={2048}
@@ -416,21 +435,23 @@ export default function Gallery() {
         shadow-camera-far={22}
         shadow-bias={-0.0004}
       />
-      <directionalLight position={[-5, 6, 2]} intensity={0.4} color="#ffeedd" />
-      <pointLight position={[0, 3.3, 0]} intensity={18} color="#ffffff" distance={16} decay={2} />
+      <directionalLight position={[-5, 6, 2]} intensity={0.25} color="#ffeedd" />
+      <pointLight position={[0, 3.3, 0]} intensity={8} color="#ffffff" distance={14} decay={2} />
 
       {ART_SPOTS.map((spot, i) => (
-        <AimedSpot key={i} position={spot.position} targetPosition={spot.target} />
+        <AimedSpot key={i} position={spot.position} targetPosition={spot.target} intensity={75} castShadow={i < 4} />
       ))}
 
-      <AimedSpot position={[-2, 3.2, 0.6]} targetPosition={[-2, 1.35, 0]} intensity={40} />
-      <AimedSpot position={[2, 3.2, -0.9]} targetPosition={[2, 1.4, -1.5]} intensity={40} />
+      <AimedSpot position={[-2, 3.2, 0.6]} targetPosition={[-2, 1.35, 0]} intensity={45} castShadow={false} />
+      <AimedSpot position={[2, 3.2, -0.9]} targetPosition={[2, 1.4, -1.5]} intensity={45} castShadow={false} />
 
-      <Environment resolution={64} frames={1}>
-        <Lightformer form="rect" intensity={0.9} position={[0, 5, 0]} rotation-x={Math.PI / 2} scale={[10, 6, 1]} color="#fff4e0" />
-        <Lightformer form="rect" intensity={0.35} position={[-6, 2, 0]} rotation-y={Math.PI / 2} scale={[6, 3, 1]} color="#e8eeff" />
-        <Lightformer form="rect" intensity={0.35} position={[6, 2, 0]} rotation-y={-Math.PI / 2} scale={[6, 3, 1]} color="#ffe9d0" />
-      </Environment>
+      {!bonusOff && (
+        <Environment resolution={64} frames={1}>
+          <Lightformer form="rect" intensity={0.9} position={[0, 5, 0]} rotation-x={Math.PI / 2} scale={[10, 6, 1]} color="#fff4e0" />
+          <Lightformer form="rect" intensity={0.35} position={[-6, 2, 0]} rotation-y={Math.PI / 2} scale={[6, 3, 1]} color="#e8eeff" />
+          <Lightformer form="rect" intensity={0.35} position={[6, 2, 0]} rotation-y={-Math.PI / 2} scale={[6, 3, 1]} color="#ffe9d0" />
+        </Environment>
+      )}
 
       <GalleryScene />
     </group>

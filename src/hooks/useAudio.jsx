@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react'
+import { bonusDisabled } from './bonusFlag'
 
 const AudioContext = createContext(null)
 
@@ -293,6 +294,7 @@ class GalleryAudioEngine {
 const engine = new GalleryAudioEngine()
 
 export function AudioProvider({ children }) {
+  const disabled = bonusDisabled()
   const [isPlaying, setIsPlaying] = useState(false)
   const playingRef = useRef(false)
 
@@ -305,6 +307,7 @@ export function AudioProvider({ children }) {
   }, [])
 
   const start = useCallback(() => {
+    if (disabled) return
     try {
       engine.start()
       setIsPlaying(engine.running)
@@ -313,7 +316,7 @@ export function AudioProvider({ children }) {
       engine.running = false
       setIsPlaying(false)
     }
-  }, [])
+  }, [disabled])
 
   const stop = useCallback(() => {
     engine.stop()
@@ -321,16 +324,17 @@ export function AudioProvider({ children }) {
   }, [])
 
   const toggle = useCallback(() => {
+    if (disabled) return
     if (playingRef.current) stop()
     else start()
-  }, [stop, start])
+  }, [disabled, stop, start])
 
   const sfx = useCallback((name) => {
-    if (!playingRef.current) return
+    if (!playingRef.current || disabled) return
     if (name === 'whoosh') engine.whoosh()
     else if (name === 'chime') engine.chime()
     else if (name === 'click') engine.click()
-  }, [])
+  }, [disabled])
 
   return (
     <AudioContext.Provider value={{ isPlaying, toggle, playWhoosh: () => sfx('whoosh'), playChime: () => sfx('chime'), playClick: () => sfx('click') }}>
